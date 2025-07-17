@@ -4,25 +4,14 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 630px;
+  height: 710px;
 }
 
 .slide {
   width: 100%;
-  height: 630px;
+  height: 710px;
   transition: transform .8s ease-in-out;
 
-}
-
-.slide::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
-  pointer-events: none;
 }
 
 .slide-hidden {
@@ -31,20 +20,24 @@
 .imgCarrusel{
   position: absolute;
   width: 100%;
-  height: 630px;
-  object-fit: cover;
+  height: 100%;
+
+  
+  
 }
 .insideCard{
     position: absolute;
     color: white;
-    margin-top: 7rem;
+    margin-top: 13rem;
     margin-left: 36%;
-    padding: 1.8rem;
+    padding: 1.5rem;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(0, 255, 0, 0.3);
-    backdrop-filter: blur(15px);
-    background: rgba(26, 24, 24, 0.671);    border-radius: 20px;
-    width: 500px;
+    border: 1.5px solid rgba(90, 92, 90, 0.906);
+    backdrop-filter: blur(6px);
+    background: rgba(24, 25, 26, 0.485);
+   
+    border-radius: 20px;
+    width: 590px;
     text-align: center;
     transition: all 0.3s ease;
     /*z-index: 2;*/
@@ -92,19 +85,19 @@
 
 .insideCard:hover {
     transform: translateY(-5px);
-    box-shadow: 0 25px 80px rgba(0, 255, 0, 0.2);
-    border-color: rgba(0, 255, 0, 0.5);
+    box-shadow: 0 25px 80px rgba(0, 242, 255, 0.2);
+    border-color: rgba(0, 255, 221, 0.5);
 }
 
 .insideCard h3 {
-    font-size: 2rem;
+    font-size: 1.9rem;
     font-weight: 700;
-    margin-bottom: 1rem;
-    background: linear-gradient(135deg, #ffffff 0%, #00ff00 100%);
+    margin-bottom: 0.8rem;
+    background: linear-gradient(135deg, #ffffff 0%, #7FFFD4 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    text-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
 }
 
 .insideCard p {
@@ -116,8 +109,8 @@
 
 .btnInsideCard{
     border-radius: 25px; 
-    padding: 0.8rem 1.8rem;
-    background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
+    padding: 0.8rem 1.6rem;
+    background: linear-gradient(135deg, #7FFFD4	 0%, #20B2AA 100%);
     color: #000000;
     font-weight: 700;
     border: none;
@@ -126,13 +119,13 @@
     font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    box-shadow: 0 5px 15px rgba(0, 255, 0, 0.3);
+    box-shadow: 0 5px 15px rgba(0, 221, 255, 0.3);
 }
 
 .btnInsideCard:hover {
-    background: linear-gradient(135deg, #00cc00 0%, #00aa00 100%);
+    background: linear-gradient(135deg, #20B2AA 0%, #7FFFD4 100%);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 255, 0, 0.4);
+    box-shadow: 0 8px 25px rgba(0, 255, 234, 0.4);
 }
 .arrow {
   position:absolute;

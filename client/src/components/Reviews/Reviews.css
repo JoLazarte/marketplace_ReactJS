@@ -1,9 +1,9 @@
 /* Reviews modernizadas */
 .reviews-container {
   width: 100%;
-  max-width: 1200px;
+
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0rem 8rem 5rem 8rem;
 }
 
 .reviews-grid {
@@ -31,14 +31,14 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, transparent, #00ff00, transparent);
+  background: linear-gradient(90deg, transparent, #00ffe5, transparent);
   opacity: 0.7;
 }
 
 .review-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 255, 0, 0.1);
-  border-color: rgba(0, 255, 0, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 255, 187, 0.1);
+  border-color: rgba(0, 255, 238, 0.3);
 }
 
 .review-content {
@@ -48,7 +48,7 @@
 
 .quote-icon {
   font-size: 3rem;
-  color: #00ff00;
+  color: #00fff2;
   opacity: 0.3;
   position: absolute;
   top: -10px;
@@ -77,7 +77,7 @@
   font-size: 1.1rem;
   font-weight: 600;
   margin: 0;
-  background: linear-gradient(135deg, #ffffff 0%, #00ff00 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #7FFFD4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

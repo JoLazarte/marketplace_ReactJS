@@ -132,7 +132,7 @@ const Header = () => {
 
 const HeaderContainer = styled.header`
   background: linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(26, 26, 26, 0.95) 100%);
-  border-bottom: 1px solid rgba(0, 255, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 255, 229, 0.2);
   padding: 1rem 2rem;
   position: fixed;
   top: 0;
@@ -171,14 +171,14 @@ const Logo = styled.div`
     align-items: center;
     
     &:hover {
-      color: #00ff00;
-      text-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+      color: #00ffddff;
+      text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
       transform: scale(1.05);
     }
   }
 
   .logo-text {
-    background: linear-gradient(135deg, #ffffff 0%, #00ff00 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #7FFFD4 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -188,19 +188,19 @@ const Logo = styled.div`
 
   img {
     border-radius: 50%;
-    border: 2px solid rgba(0, 255, 0, 0.3);
+    border: 2px solid rgba(0, 255, 255, 0.3);
     transition: all 0.3s ease;
   }
 
   &:hover img {
-    border-color: #00ff00;
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+    border-color: #00fff2ff;
+    box-shadow: 0 0 15px rgba(0, 255, 225, 0.3);
   }
 `;
 
 const SearchBarContainer = styled.div`
   flex: 1;
-  max-width: 600px;
+  max-width: 650px;
   margin: 0 2rem;
 `;
 
@@ -216,7 +216,7 @@ const Nav = styled.nav`
     width: 100%;
     background: rgba(20, 20, 20, 0.98);
     backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(0, 255, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 255, 251, 0.2);
     flex-direction: column;
     padding: 1rem;
     gap: 1rem;
@@ -237,7 +237,7 @@ const MobileMenuButton = styled.button`
   transition: color 0.3s ease;
 
   &:hover {
-    color: #00ff00;
+    color: #00ffeeff;
   }
 
   @media (max-width: 768px) {
@@ -254,7 +254,7 @@ const NavItem = styled.div`
     transition: color 0.3s ease;
 
     &:hover {
-      color: #00ff00;
+      color: #00ffeeff;
     }
   }
 `;
@@ -324,8 +324,8 @@ const UserButton = styled.button`
   transition: all 0.3s ease;
 
   &:hover {
-    color: #00ff00;
-    background: rgba(0, 255, 0, 0.1);
+    color: #00ffeeff;
+    background: rgba(0, 255, 229, 0.1);
   }
 
   svg {
@@ -383,7 +383,7 @@ const MenuItem = styled.a`
 
   &:hover {
     background: rgba(0, 255, 0, 0.1);
-    color: #00ff00;
+    color: #00ffeeff;
   }
 `;
 
@@ -397,7 +397,7 @@ const CartContainer = styled.div`
   color: #ffffff;
 
   &:hover {
-    color: #00ff00;
+    color: #00ffeeff;
   }
 `;
 

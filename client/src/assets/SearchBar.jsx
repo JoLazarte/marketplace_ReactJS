@@ -29,7 +29,7 @@ const StyledWrapper = styled.div`
     height: 43px;
     line-height: 28px;
     padding: 0 1rem;
-    width: 500px;
+    width: 600px;
     padding-left: 2.5rem;
     border: 2px solid transparent;
     border-radius: 8px;

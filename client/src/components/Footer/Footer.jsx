@@ -55,7 +55,7 @@ const FooterContainer = styled.footer`
   );
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(0, 255, 0, 0.2);
+  border-top: 1px solid rgba(0, 255, 204, 0.2);
   margin-top: auto;
   margin-bottom: 0;
   position: relative;
@@ -78,19 +78,20 @@ const FooterContainer = styled.footer`
 `;
 
 const FooterWrapper = styled.div`
-  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
-  padding: 0 2rem;
-  position: relative;
-  z-index: 1;
+  padding: 4rem 3rem;
+  
+ 
 `;
 
 const FooterContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
+  
   gap: 1.5rem;
+  flex-direction: row;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -176,21 +177,21 @@ const baseButtonStyles = `
   }
 
   &:hover {
-    background: rgba(0, 255, 0, 0.9);
-    border-color: rgba(0, 255, 0, 0.8);
+    background: rgba(189, 47, 47, 0.9);
+    border-color: rgba(187, 39, 39, 0.8);
     color: #000000;
     transform: translateY(-4px) scale(1.05);
     box-shadow: 
-      0 8px 25px rgba(0, 255, 0, 0.3),
-      0 0 20px rgba(0, 255, 0, 0.2);
+      0 8px 25px rgba(255, 0, 0, 0.3),
+      0 0 20px rgba(255, 0, 0, 0.2);
     animation: none;
   }
 
   &:focus {
     outline: none;
     box-shadow: 
-      0 0 0 3px rgba(0, 255, 0, 0.4),
-      0 8px 25px rgba(0, 255, 0, 0.3);
+      0 0 0 3px rgba(255, 0, 0, 0.4),
+      0 8px 25px rgba(255, 0, 0, 0.3);
   }
 
   &:active {
@@ -211,7 +212,7 @@ const baseButtonStyles = `
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
     50% {
-      box-shadow: 0 4px 20px rgba(0, 255, 0, 0.1);
+      box-shadow: 0 4px 20px rgba(255, 0, 0, 0.1);
     }
     100% {
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);

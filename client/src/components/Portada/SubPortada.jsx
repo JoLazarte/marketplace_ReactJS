@@ -16,7 +16,7 @@ const SubPortada = () => {
       <p className="mb-3">¡Regístrate hoy mismo para explorar los mejores libros y álbumes al mejor precio!</p>
       <p className="mb-4">Aprovechá nuestras ofertas especiales y descuentos exclusivos en productos seleccionados</p>
       {!user && (
-        <Link to="/register" className="btn btn-lg btn-light px-5 py-2 fw-bold shadow" id='btnReg'>¡Registrate!</Link>
+        <Link to="/register" className="btn btn-lg btn-light px-5 py-2 fw-bold shadow btnReg">¡Registrate!</Link>
       )}
     </div>
   )

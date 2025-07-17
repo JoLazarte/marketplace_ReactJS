@@ -14,21 +14,22 @@
   display: flex;
   flex-direction: row;
    justify-content:space-around;
-  font-family: 'Fraunces', serif;
+
     padding-top: 15px;
     padding-right: 0px;
 
 }
 .icono-menu{
    margin-right: 20px;
-   font-size: 16px;
+   font-size: 0.9rem;
+   font-weight: 500;
    cursor: pointer;
     
 }
 .icono-menu:hover,
 .icono-menu:focus{
     
-    color: rgba(186, 172, 172, 0.997);
+    color: rgba(194, 39, 39, 0.997);
     outline: none;
 }
 
