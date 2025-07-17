@@ -1,0 +1,43 @@
+#navAside {
+
+   position: fixed;
+   z-index: 1;
+   margin-top: 5rem;
+   padding: 0.8rem;
+   height: 4rem;
+   width: 100vw;
+   box-shadow: 0px 0px 20px 0px rgb(95, 85, 85);
+    background-color: #f1ebeb;
+    color: black;
+}
+.menuAside{
+  display: flex;
+  flex-direction: row;
+   justify-content:space-around;
+  font-family: 'Fraunces', serif;
+    padding-top: 15px;
+    padding-right: 0px;
+
+}
+.icono-menu{
+   margin-right: 20px;
+   font-size: 16px;
+   cursor: pointer;
+    
+}
+.icono-menu:hover,
+.icono-menu:focus{
+    
+    color: rgba(186, 172, 172, 0.997);
+    outline: none;
+}
+
+.navbar-toggler {
+  display: none;
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+}
+.navbar-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}

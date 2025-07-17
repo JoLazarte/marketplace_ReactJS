@@ -1,0 +1,28 @@
+{
+  "slides": [
+    {
+      "id": 1,
+      "src": "/1.png",
+      "alt": "Descubrí los mejores libros",
+      "title": "Descubrí los mejores libros",
+      "text": "Novedades, clásicos y mucho más para todos los gustos.",
+      "textbutton":"Ver catálogo"
+    },
+    {
+      "id": 2,
+      "src": "/2.png",
+      "alt": "Álbumes exclusivos",
+      "title": "Álbumes exclusivos",
+      "text": "Coleccioná música en formato físico y viví la experiencia completa.",
+      "textbutton":"Ver álbumes"
+    },
+    {
+      "id": 3,
+      "src": "/3.png",
+      "alt": "Promociones imperdibles",
+      "title": "Promociones imperdibles",
+      "text": "Aprovechá descuentos y beneficios exclusivos para miembros.",
+      "textbutton":"Unite ahora"
+    }
+  ]
+}

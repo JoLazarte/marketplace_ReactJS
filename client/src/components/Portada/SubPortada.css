@@ -1,0 +1,16 @@
+.cta-glass {
+  background: rgba(24, 25, 26, 0.641);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+  border: 1.5px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(6px);
+  padding: 1.5rem;
+ /* z-index: 2; */
+  position: absolute;
+  color:white;
+  top: 40px;
+  width: 50%;
+}
+#btnReg{
+    border-radius: 2rem; 
+}

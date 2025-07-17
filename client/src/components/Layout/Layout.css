@@ -1,0 +1,75 @@
+main {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #121212;
+}
+section {
+ 
+  background: linear-gradient(135deg, #232526 0%, #1c1c1c 100%);
+
+}
+#portada{
+  width: 100%;
+  height: 100%;
+  display: flex;
+
+  justify-content: center;
+  padding: 200px 0px 80px 0px;
+  
+}
+#subPortada{
+  position: relative;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+
+  background-image: url(/dumbo2.png);
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+  margin-bottom: 60px;
+  
+}
+
+.carrusel{
+  width: 100%;
+  height: 100%; 
+  padding: 50px 20px 180px;
+  margin-bottom: 60px;
+}
+.grid{
+  width: 100%;
+  height: 100%; 
+  padding: 50px 20px;
+  margin-bottom: 60px;
+}
+
+.h3layout{
+  color: #ffffff;
+  padding-top: 20px;
+  padding-bottom: 75px;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #ffffff 0%, #00ff00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+  position: relative;
+}
+
+.h3layout::after {
+  content: '';
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #00ff00, transparent);
+  border-radius: 2px;
+}

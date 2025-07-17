@@ -1,0 +1,85 @@
+#headerContainer {
+  position: fixed;
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 5rem;
+  width: 100vw; 
+  padding: 1rem 1.5rem; 
+ 
+  background-color:  #1a1a1a;
+  color: #fff !important;
+  top: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#logo{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.logo-text{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.5rem;
+  color: white;
+  font-weight: bold;
+  margin-left: 0.5rem;
+}
+.menu{
+  display: flex;
+  flex-direction: row;
+   justify-content: flex-end;
+   align-items: center;
+  font-family: 'Fraunces', serif;
+  gap: 1rem;
+}
+.icono-login{
+   display: flex;
+   gap: 0.5rem;
+}
+.contacto{
+  margin-right: 5px;
+  cursor: pointer;
+  color: white;
+  font-size: 1rem;
+}
+#searchBar{
+  margin-right: 0px;
+}
+
+.icono-login button {
+  transition: all 0.3s ease;
+}
+
+.icono-login button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
+}
+
+.icono-cart {
+  display: flex;
+  align-items: center;
+  
+}
+
+@media (max-width: 768px) {
+  #headerContainer {
+    padding: 1rem;
+  }
+
+  .contacto {
+    display: none;
+  }
+
+  .icono-login {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-text {
+    font-size: 1.2rem;
+  }
+}
