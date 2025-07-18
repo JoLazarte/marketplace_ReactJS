@@ -8,19 +8,19 @@
  /* z-index: 2; */
   position: absolute;
   color:white;
-  top: 40px;
+  top: 50px;
   width: 50%;
 }
 .cta-glass:hover {
     transform: translateY(-5px);
-    box-shadow: 0 25px 80px rgba(0, 242, 255, 0.2);
-    border-color: rgba(0, 255, 221, 0.5);
+    box-shadow: 0 25px 80px rgba(255, 0, 0, 0.2);
+    border-color: rgba(255, 0, 0, 0.5);
 }
 .cta-glass h2 {
     font-size: 1.9rem;
     font-weight: 700;
     margin-bottom: 0.8rem;
-    background: linear-gradient(135deg, #7FFFD4 0%, #ffffff  100%);
+    background: linear-gradient(135deg, #ff7f7f 0%, #ffffff  100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -29,8 +29,8 @@
 .btnReg{
    border-radius: 25px; 
     padding: 0.8rem 1.6rem;
-    background: linear-gradient(135deg, #7FFFD4	 0%, #20B2AA 100%);
-    color: #000000;
+    background: linear-gradient(135deg, #fb9292 0%, #cd3535 100%);
+    color: #1e1c1c;
     font-weight: 700;
     border: none;
     cursor: pointer;
@@ -38,10 +38,10 @@
     font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    box-shadow: 0 5px 15px rgba(0, 221, 255, 0.3);
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
 }
 .btnReg:hover {
-    background: linear-gradient(135deg, #20B2AA 0%, #7FFFD4 100%);
+    background: linear-gradient(135deg, #cd3535 0%, #fb9292 100%);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 255, 234, 0.4);
+    box-shadow: 0 8px 25px rgba(255, 0, 0, 0.4);
 }

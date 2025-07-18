@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useCallback } from 'react';
 import Slider from 'react-slick';
 import styled from 'styled-components';
+import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import ProductCardBook from './ProductCardBook';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
@@ -85,13 +86,13 @@ const Books = () => {
   }
 
   return (
-    <Container id='cardContainer'>
+    <Container>
       {canEditProducts && canEditProducts() && (
         <AddButton onClick={() => navigate('/book-form')}>
           + Agregar Libro
         </AddButton>
       )}
-      <Slider className="marginCard" ref={arrowRef} {...settings}>
+      <Slider className="marginCardBook" ref={arrowRef} {...settings}>
         {books.filter(item => item && item.id).map(item => (
           <ProductCardBook 
             item={item} 
@@ -100,10 +101,8 @@ const Books = () => {
           />
         ))}
       </Slider>
-      <Buttons>
-        <button onClick={() => arrowRef.current.slickPrev()} className='back'>{"<"}</button>
-        <button onClick={() => arrowRef.current.slickNext()} className='next'>{">"}</button>
-      </Buttons>
+        <SlArrowLeft onClick={() => arrowRef.current.slickPrev()} className='arr backArr'/>
+        <SlArrowRight onClick={() => arrowRef.current.slickNext()} className='arr forwardArr'/> 
     </Container>
   );
 };
@@ -112,7 +111,7 @@ export default Books;
 
 
 const Container = styled.div`
-    width: 80%;
+    width: 75%;
     height: 100%;
     margin: 0 auto;
     position: relative;
@@ -121,7 +120,7 @@ const Container = styled.div`
         width: 90%;
     }
     
-    .marginCard{
+    .marginCardBook{
         margin: inherit;
     }
   
@@ -157,43 +156,35 @@ const Container = styled.div`
         margin: 0;
     }
 
+    .arr{
+      
+      position:absolute;
+      cursor: pointer;
+      color: rgba(5, 251, 218, 1); 
+      
+      margin-top:-12rem;
+      font-size: 1.4rem;
+     
+    }
+   
+  
+    .arr.backArr{
+        margin-left:-2rem;
+    }
+    .arr.forwardArr{
+        margin-left:73rem;
+    }
+    
     @media(max-width:530px){
         display: none;
     }
 `
 
-const Buttons = styled.div`
-    button{
-        width: 2rem;
-        height: 2rem;
-        background-color: rgba(255, 255, 255, 0.1);
-        cursor: pointer;
-        color: #01be96;
-        border: none;
-        position: absolute;
-        top: 45%;
-        right: -1rem;
-        transform: translateY(-50%);
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: all 0.3s ease;
-        
-        &:hover{
-            background-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-50%) scale(1.1);
-        }
-    }
-    
-    .back{
-        left: -1rem;
-        right: auto;
-    }`
-    const AddButton = styled.button`
+
+const AddButton = styled.button`
   background: #181818;
   color: #fff;
-  border: 2px solid #00ff00;
+  border: 2px solid #00ffeaff;
   border-radius: 2rem;
   padding: 0.7rem 1.5rem;
   font-size: 1rem;
