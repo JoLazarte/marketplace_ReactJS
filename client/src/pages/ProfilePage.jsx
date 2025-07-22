@@ -243,11 +243,11 @@ const Title = styled.h1`
 `;
 
 const ChangeSummary = styled.div`
-  background: rgba(0, 255, 0, 0.1);
+  background: rgba(0, 255, 200, 0.1);
   border-radius: 8px;
   padding: 1rem;
   margin-bottom: 1rem;
-  color: #00ff00;
+  color: #00ffeaff;
 
   h3 {
     margin: 0 0 0.5rem 0;
@@ -266,7 +266,7 @@ const ChangeSummary = styled.div`
 
 const EditButton = styled.button`
   background: linear-gradient(135deg, #1a1a1a 0%, #333333 100%);
-  color: #00ff00;
+  color: #00ffeaff;
   border: 1px solid #404040;
   padding: 0.5rem 1rem;
   border-radius: 8px;
@@ -277,8 +277,8 @@ const EditButton = styled.button`
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 255, 0, 0.2);
-    border-color: #00ff00;
+    box-shadow: 0 5px 15px rgba(0, 255, 191, 0.2);
+    border-color: #00ffeaff;
   }
 
   &:active {
@@ -338,8 +338,8 @@ const Input = styled.input`
 
   &:focus {
     outline: none;
-    border-color: #00ff00;
-    box-shadow: 0 0 0 2px rgba(0, 255, 0, 0.1);
+    border-color: #00ffeaff;
+    box-shadow: 0 0 0 2px rgba(0, 255, 191, 0.1);
   }
 
   &::placeholder {
@@ -357,11 +357,11 @@ const ErrorMessage = styled.div`
 `;
 
 const SuccessMessage = styled.div`
-  color: #00ff00;
+  color: #00ffeaff;
   text-align: center;
   padding: 0.75rem;
   margin-bottom: 1rem;
-  background-color: rgba(0, 255, 0, 0.1);
+  background-color: rgba(0, 255, 170, 0.1);
   border-radius: 8px;
 `;
 

@@ -11,7 +11,7 @@ const ProductCardDiscs = ({ item, onStatusChange }) => {
 
   const { id, title, author, description, urlImage, price, stock = 0, active, discountPercentage = 0, discountActive = false } = item;
   const navigate = useNavigate();
-  const { canEditProducts } = useAuth();
+  const { canEditProducts, canAddFavourite } = useAuth();
   const [isToggling, setIsToggling] = useState(false);
 
   const isOutOfStock = stock === 0;
@@ -60,7 +60,10 @@ const ProductCardDiscs = ({ item, onStatusChange }) => {
         {isOutOfStock && <div className="stock-overlay">Sin stock</div>}
         {isInactive && <div className="inactive-overlay">Deshabilitado</div>}
         {hasDiscount && <div className="discount-badge">{discountPercentage}% OFF</div>}
-        <div className="save">
+        {canAddFavourite && canAddFavourite() && (
+        <div className="save"
+
+        >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 683 683" className="svg">
               <g clipPath="url(#clip0_993_25)">
                 <mask height={683} width={683} y={0} x={0} maskUnits="userSpaceOnUse" style={{maskType: 'luminance'}} id="mask0_993_25">
@@ -77,6 +80,7 @@ const ProductCardDiscs = ({ item, onStatusChange }) => {
               </defs>
             </svg>
         </div>
+      )}
       </div>
       <div className="text">
         <h3 className="titulo">{title}</h3>
@@ -84,15 +88,17 @@ const ProductCardDiscs = ({ item, onStatusChange }) => {
         <p className="labelYear">{item.recordLabel} {item.year && `- ${item.year}`}</p>
         <p className="descrProd">{description}</p>
         <div className="priceBuy">
-          {hasDiscount ? (
-            <>
-              <span className="original-price">${price.toFixed(2)}</span>
-              <span className="final-price">${finalPrice.toFixed(2)}</span>
-            </>
-          ) : (
-            <span className="price">${price.toFixed(2)}</span>
-          )}
-            <button className="buttonCardB">Comprar</button>
+          
+            {hasDiscount ? (
+              <div className="priceDiscountDisc">
+                <span className="original-price">${price.toFixed(2)}</span>
+                <span className="final-price">${finalPrice.toFixed(2)}</span>
+              </div>
+            ) : (
+              <span className="price">${price.toFixed(2)}</span>
+            )}
+    
+          <button className="buttonCardB">Comprar</button>
         </div>
       </div>
     </>

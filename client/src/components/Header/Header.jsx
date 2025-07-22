@@ -7,7 +7,6 @@ import { useAuth } from '../../hooks/useAuth';
 import SearchBar from '../../assets/SearchBar';
 import ShoppCartIcon from '../../assets/ShoppCartIcon';
 import { FaUser, FaChevronDown, FaBars, FaTimes } from 'react-icons/fa';
-import './Header.css';
 
 const Header = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -60,7 +59,7 @@ const Header = () => {
     <HeaderContainer>
       <Logo>
         <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-          <div id='logo'>
+          <div>
             <img src="/Dumbo.png" alt="Logo" width="45" height="45" className="me-2"/>
             <span className="logo-text">Dumbo Librerías</span>
           </div>
@@ -71,13 +70,10 @@ const Header = () => {
         <SearchBar />
       </SearchBarContainer>
 
-      {/* Menu hamburguesa para mobile */}
-      <MobileMenuButton onClick={toggleMobileMenu}>
-        {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
-      </MobileMenuButton>
+    
 
       {/* Navegación desktop */}
-      <Nav $isMobileMenuOpen={isMobileMenuOpen}>
+      <Nav $isMobileMenuOpen={isMobileMenuOpen} >
         
         <NavItem>
           <Link to="/contact" onClick={handleMobileMenuClose}>Contacto</Link>
@@ -131,8 +127,6 @@ const Header = () => {
 };
 
 const HeaderContainer = styled.header`
-  background: linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(26, 26, 26, 0.95) 100%);
-  border-bottom: 1px solid rgba(0, 255, 229, 0.2);
   padding: 1rem 2rem;
   position: fixed;
   top: 0;
@@ -140,11 +134,16 @@ const HeaderContainer = styled.header`
   right: 0;
   z-index: 1000;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 5rem;
+  width: 100vw; 
+  background: linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(26, 26, 26, 0.95) 100%);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(0, 255, 229, 0.236);
   
   /* Overlay oscuro que cubre toda la altura */
   &::before {
@@ -158,10 +157,12 @@ const HeaderContainer = styled.header`
     z-index: -1;
   }
 `;
-
 const Logo = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 
   a {
     color: #ffffff;
@@ -184,6 +185,8 @@ const Logo = styled.div`
     background-clip: text;
     font-weight: 700;
     margin-left: 0.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.5rem;
   }
 
   img {
@@ -208,6 +211,7 @@ const Nav = styled.nav`
   display: flex;
   gap: 2rem;
   align-items: center;
+  
   
   @media (max-width: 768px) {
     position: fixed;
@@ -276,7 +280,7 @@ const DropdownButton = styled.button`
   transition: color 0.3s ease;
   padding: 0;
   &:hover {
-    color: #00ff00;
+    color: #00ffe5ff;
   }
 `;
 
@@ -302,8 +306,8 @@ const DropdownMenuItem = styled.div`
   transition: background 0.2s, color 0.2s;
   background: none;
   &:hover {
-    background: rgba(0,255,0,0.08);
-    color: #00ff00;
+    background: rgba(0, 255, 191, 0.08);
+    color: #00ffe5ff;
   }
 `;
 

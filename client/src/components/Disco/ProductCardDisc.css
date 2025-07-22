@@ -1,3 +1,4 @@
+
 .containerDisc {
 
   margin-right:20px;
@@ -12,6 +13,12 @@
   transition: all 0.3s ease;
   overflow: hidden;
 
+}
+.containerDisc:last-child {
+  margin-right: 0px;
+}
+ .containerDisc:first-child {
+  margin-left: 20px;
 }
 
 .containerDisc:hover {
@@ -43,11 +50,11 @@
 .save {
     transition: 0.2s ease-in-out;
     border-radius: 10px;
-    margin-top:11px;
-    margin-left: 230px;
+    top:10px;
+    right: 11px;
     width: 38px;
     height: 38px;
-    
+    z-index: 3;
     background-color:rgb(255, 255, 255);
     position: absolute;
     display: flex;
@@ -210,7 +217,7 @@
 .discount-badge {
   position: absolute;
   top: 10px;
-  right: 10px;
+  left:11px;
   background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
   color: white;
   padding: 0.3rem 0.6rem;
@@ -240,7 +247,8 @@
 .descrProd{
       line-height: 1rem;
       font-size:0.8rem;
-    }
+
+}
 .labelYear{
    line-height: 0rem;
    font-size:0.8rem;
@@ -251,9 +259,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding-top:1.3rem;
-   
-   
+    padding-top: 0.5rem;
+    padding-bottom: 0rem;
   }
   
 .price{
@@ -278,14 +285,18 @@
     color: #134140;
     border: 1px solid rgba(0, 255, 208, 0.2);
     cursor: pointer;
-  
+    margin-bottom: 0;
   }
 
 .buttonCardB:hover {
     background: linear-gradient(135deg, #20B2AA 0%, #7FFFD4 100%);
     transform: translateY(-2px);
   }
-
+.priceDiscountDisc{
+  display: flex;
+  flex-direction: column;
+  justify-content:space-between;
+}
 .original-price {
   color: #ff4444;
   text-decoration: line-through;
@@ -300,6 +311,7 @@
   font-size: 1.4rem;
   margin: 0;
   text-shadow: 0 0 10px rgba(0, 255, 170, 0.3);
+  padding-bottom: 0rem;
 }
 
 .text {

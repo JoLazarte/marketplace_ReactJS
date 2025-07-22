@@ -2,16 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { useCart } from '../hooks/useCart'
-
+import { useAuth } from '../hooks/useAuth';
 const API_URL_BOOKS = 'http://localhost:8080/books';
 const API_URL_DISCS = 'http://localhost:8080/musicAlbums';
 
 const DetailPage = () => {
   const { type, id } = useParams();
   const { addToCart } = useCart();
+  const {isAdmin} = useAuth();
   const [item, setItem] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
+
+  const isAdminOn = isAdmin()
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -67,26 +70,32 @@ const DetailPage = () => {
   const isDisc = type === 'disc';
 
   const handleDecrease = () => {
+    
     if (quantity > 1) {
-      setQuantity(prev => prev - 1);
+        setQuantity(prev => prev - 1);
     }
+    
   };
 
   const handleIncrease = () => {
+   
     if (quantity < item.stock) {
       setQuantity(prev => prev + 1);
+     
     }
   };
 
   const handleAddToCart = () => {
+    
     const itemToAdd = {
-      ...item,
-      quantity: quantity,
-      price: item.price,
-      discountPercentage: item.discountPercentage || 0,
-      discountActive: item.discountActive || false
+        ...item,
+        quantity: quantity,
+        price: item.price,
+        discountPercentage: item.discountPercentage || 0,
+        discountActive: item.discountActive || false
     };
-    addToCart(itemToAdd);
+      addToCart(itemToAdd);
+    
   };
 
   const renderPrice = () => {
@@ -131,7 +140,7 @@ const DetailPage = () => {
         </ImageContainer>
         <InfoContainer>
           <Title>{item.title}</Title>
-          <Author>{isDisc ? item.artist : item.author}</Author>
+          <Author>{item.author}</Author>
           {isDisc ? (
             <RecordInfo>
               <DetailRow>
@@ -170,19 +179,19 @@ const DetailPage = () => {
 
           {renderPrice()}
 
-          {item.stock > 0 ? (
-            <StockContainer>
+           {item.stock > 0 ? (
+            <StockContainer className={isAdminOn? 'stockContDisabled': ''}>
               <StockStatus>✔ ¡En stock!</StockStatus>
               <QuantityContainer>
-                <QuantityControl>
-                  <QuantityButton onClick={handleDecrease}>−</QuantityButton>
-                  <QuantityDisplay>{quantity}</QuantityDisplay>
-                  <QuantityButton onClick={handleIncrease}>+</QuantityButton>
-                </QuantityControl>
-                <AddToCartButton onClick={handleAddToCart}>
-                  Agregar al carrito
-                </AddToCartButton>
-              </QuantityContainer>
+                 <QuantityControl>
+                   <QuantityButton  type='button'  onClick={handleDecrease} className={isAdminOn? 'disabled': ''}>−</QuantityButton>
+                   <QuantityDisplay>{quantity}</QuantityDisplay>
+                   <QuantityButton  type='button' onClick={handleIncrease} className={isAdminOn? 'disabled': ''}  >+</QuantityButton>
+                 </QuantityControl>
+                 <AddToCartButton  type='button' onClick={handleAddToCart} className={isAdminOn? 'disabled': ''} >
+                   Agregar al carrito
+                 </AddToCartButton>
+               </QuantityContainer>
               <StockInfo>Stock disponible: {item.stock}</StockInfo>
             </StockContainer>
           ) : (
@@ -211,13 +220,20 @@ const Container = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 20% 80%, rgba(0, 255, 0, 0.15) 0%, transparent 50%),
+    background: radial-gradient(circle at 20% 80%, rgba(0, 255, 187, 0.15) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(255, 68, 68, 0.15) 0%, transparent 50%),
                 radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
     pointer-events: none;
   }
-`
 
+  .disabled {
+   
+    pointer-events: none;
+    user-select: none;
+  
+  }
+
+`
 const Card = styled.div`
   display: flex;
   background: rgba(0, 0, 0, 0.85);
@@ -254,10 +270,10 @@ const Card = styled.div`
     right: -2px;
     bottom: -2px;
     background: linear-gradient(45deg, 
-      rgba(0, 255, 0, 0.3) 0%,
+      rgba(0, 255, 174, 0.3) 0%,
       rgba(255, 68, 68, 0.3) 25%,
       rgba(255, 255, 255, 0.1) 50%,
-      rgba(0, 255, 0, 0.3) 75%,
+      rgba(0, 255, 213, 0.3) 75%,
       rgba(255, 68, 68, 0.3) 100%
     );
     border-radius: 30px;
@@ -336,15 +352,15 @@ const ImageContainer = styled.div`
 
 const InfoContainer = styled.div`
   flex: 1.2;
-  padding: 3rem;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.2rem;
   background: rgba(0, 0, 0, 0.2);
 `
 
 const Title = styled.h1`
-  font-size: 3rem;
+  font-size: 2rem;
   background: linear-gradient(135deg, #fff 0%, #e0e0e0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -359,35 +375,37 @@ const Title = styled.h1`
 `
 
 const Author = styled.h2`
-  font-size: 1.6rem;
+  font-size: 1.1rem;
   background: linear-gradient(135deg, #a8a8a8 0%, #d4d4d4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin: 0;
+  padding:0;
   font-weight: 600;
 `
 
 const Description = styled.p`
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: rgba(255, 255, 255, 0.8);
-  line-height: 1.7;
+  line-height: 1.5;
   background: rgba(255, 255, 255, 0.02);
-  padding: 1.5rem;
+  padding: 1rem;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
+  margin:0;
 `
 
 const Price = styled.div`
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 900;
-  background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
+  background: linear-gradient(135deg, #00ffd5ff 0%, #00ccbeff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin: 1rem 0;
-  filter: drop-shadow(0 2px 4px rgba(0, 255, 0, 0.3));
+  filter: drop-shadow(0 2px 4px rgba(0, 255, 242, 0.3));
 `
 
 // Nuevos estilos para descuentos
@@ -395,7 +413,7 @@ const PriceSection = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 2rem;
+  padding: 1.4rem 1.6rem;
   background: rgba(255, 255, 255, 0.03);
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -410,7 +428,7 @@ const PriceSection = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 68, 68, 0.08) 0%, rgba(0, 255, 0, 0.08) 100%);
+    background: linear-gradient(135deg, rgba(255, 68, 68, 0.08) 0%, rgba(0, 255, 195, 0.08) 100%);
     pointer-events: none;
   }
 
@@ -426,7 +444,7 @@ const PriceSection = styled.div`
       transparent 0deg,
       rgba(255, 68, 68, 0.1) 90deg,
       transparent 180deg,
-      rgba(0, 255, 0, 0.1) 270deg,
+      rgba(0, 255, 191, 0.1) 270deg,
       transparent 360deg
     );
     animation: rotate 8s linear infinite;
@@ -459,7 +477,7 @@ const DiscountLabel = styled.span`
 const DiscountBadge = styled.div`
   background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
   color: white;
-  padding: 0.6rem 1.2rem;
+  padding: 0.6rem 1.1rem;
   border-radius: 25px;
   font-weight: bold;
   font-size: 0.95rem;
@@ -498,7 +516,7 @@ const PriceContainer = styled.div`
 `
 
 const OriginalPrice = styled.span`
-  font-size: 1.8rem;
+  font-size: 1.2rem;
   color: rgba(255, 68, 68, 0.7);
   text-decoration: line-through;
   font-weight: 500;
@@ -517,22 +535,22 @@ const OriginalPrice = styled.span`
 `
 
 const FinalPrice = styled.span`
-  font-size: 3.2rem;
+  font-size: 2rem;
   font-weight: 900;
-  background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
+  background: linear-gradient(135deg, #00ffd5ff 0%, #00ccbeff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 4px 12px rgba(0, 255, 0, 0.5));
-  text-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+  filter: drop-shadow(0 2px 4px rgba(0, 255, 242, 0.3));  
+  text-shadow: 0 0 20px rgba(0, 255, 191, 0.3);
   animation: glow 3s ease-in-out infinite alternate;
 
   @keyframes glow {
     from {
-      filter: drop-shadow(0 4px 12px rgba(0, 255, 0, 0.5));
+      filter: drop-shadow(0 4px 12px rgba(0, 255, 191, 0.5));
     }
     to {
-      filter: drop-shadow(0 6px 20px rgba(0, 255, 0, 0.8));
+      filter: drop-shadow(0 6px 20px rgba(0, 255, 195, 0.8));
     }
   }
 
@@ -542,18 +560,18 @@ const FinalPrice = styled.span`
 `
 
 const SavingsText = styled.div`
-  color: #00ff00;
+  color: #00ffccff;
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   text-align: center;
-  padding: 1rem;
-  background: rgba(0, 255, 0, 0.1);
+  padding: 0.5rem 0.9rem;
+  background: rgba(0, 255, 195, 0.1);
   border-radius: 12px;
   position: relative;
   z-index: 2;
-  border: 1px solid rgba(0, 255, 0, 0.3);
+  border: 1px solid rgba(0, 255, 179, 0.3);
   backdrop-filter: blur(10px);
-  box-shadow: 0 4px 15px rgba(0, 255, 0, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 255, 187, 0.2);
   
   &::before {
     content: '';
@@ -562,7 +580,7 @@ const SavingsText = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(45deg, transparent 30%, rgba(0, 255, 0, 0.1) 50%, transparent 70%);
+    background: linear-gradient(45deg, transparent 30%, rgba(0, 255, 195, 0.1) 50%, transparent 70%);
     animation: shimmer 2s infinite;
     border-radius: 12px;
   }
@@ -576,8 +594,9 @@ const SavingsText = styled.div`
 const DetailRow = styled.div`
   display: flex;
   gap: 1rem;
-  margin: 0.5rem 0;
+  margin: 0;
   padding: 0.8rem;
+  font-size: 0.9rem;
   background: rgba(255, 255, 255, 0.02);
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -585,7 +604,7 @@ const DetailRow = styled.div`
 
 const DetailLabel = styled.span`
   color: rgba(255, 255, 255, 0.6);
-  font-weight: 500;
+  font-weight: 400;
   min-width: 100px;
 `
 
@@ -595,18 +614,18 @@ const DetailValue = styled.span`
 `
 
 const RecordInfo = styled.div`
-  margin: 1rem 0;
+  margin: 0;
   background: rgba(255, 255, 255, 0.02);
-  padding: 1.5rem;
+  padding: 0;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
 `
 
 const BookInfo = styled.div`
-  margin: 1rem 0;
+  margin: 0;
   background: rgba(255, 255, 255, 0.02);
-  padding: 1.5rem;
+  padding: 0;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
@@ -616,16 +635,17 @@ const GenreContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
-  margin: 1rem 0;
+  margin: 0;
+  padding:0;
 `
 
 const GenreTag = styled.span`
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(15px);
-  padding: 0.8rem 1.4rem;
+  padding: 0.5rem 1rem;
   border-radius: 30px;
   color: rgba(255, 255, 255, 0.9);
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   font-weight: 600;
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -655,12 +675,12 @@ const GenreTag = styled.span`
   }
 
   &:nth-child(even) {
-    background: rgba(0, 255, 0, 0.08);
-    border-color: rgba(0, 255, 0, 0.2);
+    background: rgba(0, 255, 179, 0.08);
+    border-color: rgba(0, 255, 195, 0.2);
 
     &:hover {
-      background: rgba(0, 255, 0, 0.15);
-      box-shadow: 0 8px 25px rgba(0, 255, 0, 0.3);
+      background: rgba(0, 255, 179, 0.08);
+      box-shadow: 0 8px 25px rgba(0, 255, 191, 0.3);
     }
   }
 
@@ -678,17 +698,21 @@ const GenreTag = styled.span`
 const StockContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  margin-top: 1rem;
-  padding: 1.5rem;
-  background: rgba(0, 255, 0, 0.05);
+  gap: 1.2rem;
+  padding: 1rem;
+  background: rgba(0, 255, 208, 0.05);
   border-radius: 16px;
-  border: 1px solid rgba(0, 255, 0, 0.2);
+  border: 1px solid rgba(0, 255, 204, 0.2);
   backdrop-filter: blur(10px);
+
+  &.stockContDisabled {
+    filter: grayscale(0.7) brightness(0.7);
+   
+  }
 `
 
 const StockStatus = styled.p`
-  color: #00ff00;
+  color: #00ffd5ff;
   font-weight: 600;
   margin: 0;
   font-size: 1.1rem;
@@ -710,7 +734,7 @@ const QuantityControl = styled.div`
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px);
   border-radius: 12px;
-  padding: 0.5rem;
+  padding: 0.3rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
 `
 
@@ -718,7 +742,7 @@ const QuantityButton = styled.button`
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #ffffff;
-  font-size: 1.2rem;
+  font-size: 1rem;
   cursor: pointer;
   padding: 0.5rem 1rem;
   border-radius: 8px;
@@ -726,14 +750,15 @@ const QuantityButton = styled.button`
   backdrop-filter: blur(10px);
 
   &:hover {
-    background: rgba(0, 255, 0, 0.2);
-    color: #00ff00;
+    background: rgba(0, 255, 195, 0.2);
+    color: #00ffc8ff;
     transform: scale(1.1);
   }
 
   &:active {
     transform: scale(0.95);
   }
+
 `
 
 const QuantityDisplay = styled.span`
@@ -742,21 +767,21 @@ const QuantityDisplay = styled.span`
   min-width: 3rem;
   text-align: center;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 `
 
 const AddToCartButton = styled.button`
-  background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
+  background: linear-gradient(135deg, #00ffb3ff 0%, #00ccb8ff 100%);
   border: none;
-  padding: 1rem 2rem;
+  padding: 0.7rem 1.1rem;
   border-radius: 12px;
-  color: #ffffff;
+  color: #0d2e2bff;
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   box-shadow: 
-    0 8px 25px rgba(0, 255, 0, 0.3),
+    0 8px 25px rgba(0, 255, 183, 0.3),
     0 0 0 1px rgba(255, 255, 255, 0.1);
   position: relative;
   overflow: hidden;
@@ -775,7 +800,7 @@ const AddToCartButton = styled.button`
   &:hover {
     transform: translateY(-3px) scale(1.02);
     box-shadow: 
-      0 15px 35px rgba(0, 255, 0, 0.4),
+      0 15px 35px rgba(0, 255, 191, 0.4),
       0 0 0 1px rgba(255, 255, 255, 0.2);
 
     &::before {

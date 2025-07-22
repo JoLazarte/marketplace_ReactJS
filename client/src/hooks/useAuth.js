@@ -60,6 +60,10 @@ export const useAuth = () => {
     return user?.role === 'BUYER';
   }, [user?.role]);
 
+  const canAddFavourite = useCallback(() => {
+    return user?.role === 'BUYER';
+  }, [user?.role]);
+
   return {
     user,
     isAuthenticated,
@@ -72,6 +76,7 @@ export const useAuth = () => {
     isAdmin,
     canEditProducts,
     isBuyer,
+    canAddFavourite,
     handleLogin,
     handleRegister,
     handleLogout,

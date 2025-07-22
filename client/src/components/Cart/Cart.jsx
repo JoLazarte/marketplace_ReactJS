@@ -57,7 +57,7 @@ const Cart = ({ isOpen, onClose }) => {
                 navigate('/login');
               }}
               style={{
-                background: '#00ff00',
+                background: '#00ffd5ff',
                 color: '#000',
                 border: 'none',
                 padding: '8px 16px',
@@ -74,7 +74,7 @@ const Cart = ({ isOpen, onClose }) => {
                 navigate('/register');
               }}
               style={{
-                background: '#ff6b00',
+                background: '#ff4000ff',
                 color: '#fff',
                 border: 'none',
                 padding: '8px 16px',

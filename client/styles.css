@@ -4,7 +4,8 @@
    margin: 0;
    padding: 0;
    box-sizing: border-box; 
-   box-shadow: inset -10px 0 35px rgb(33, 167, 15);
+   /*  box-shadow: inset -10px 0 35px rgb(33, 167, 15);      */
+   
  
    
 }

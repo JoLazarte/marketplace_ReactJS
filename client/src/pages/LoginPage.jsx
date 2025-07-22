@@ -163,8 +163,8 @@ const Input = styled.input`
 
   &:focus {
     outline: none;
-    border-color: #00ff00;
-    box-shadow: 0 0 0 2px rgba(0, 255, 0, 0.1);
+    border-color: #00ffeaff;
+    box-shadow: 0 0 0 2px rgba(0, 255, 174, 0.1);
   }
 
   &::placeholder {
@@ -174,7 +174,7 @@ const Input = styled.input`
 
 const Button = styled.button`
   background: linear-gradient(135deg, #1a1a1a 0%, #333333 100%);
-  color: #00ff00;
+  color: #00ffeaff;
   border: 1px solid #404040;
   padding: 1rem;
   border-radius: 8px;
@@ -184,19 +184,14 @@ const Button = styled.button`
   transition: all 0.3s ease;
   margin-top: 1rem;
 
-  &:hover:not(:disabled) {
+  &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 255, 0, 0.2);
-    border-color: #00ff00;
+    box-shadow: 0 5px 15px rgba(0, 255, 191, 0.2);
+    border-color: #00ffeaff;
   }
 
-  &:active:not(:disabled) {
+  &:active {
     transform: translateY(0);
-  }
-
-  &:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
   }
 `;
 
@@ -223,7 +218,7 @@ const RegisterLink = styled.p`
   color: #a8a8a8;
 
   a {
-    color: #00ff00;
+    color: #00ffeaff;
     text-decoration: none;
     font-weight: 600;
 
@@ -258,7 +253,7 @@ const TogglePasswordButton = styled.button`
   transition: color 0.3s ease;
 
   &:hover:not(:disabled) {
-    color: #00ff00;
+    color: #00ffeaff;
   }
 
   &:disabled {

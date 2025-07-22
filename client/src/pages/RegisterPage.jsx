@@ -216,8 +216,8 @@ const Input = styled.input`
 
   &:focus {
     outline: none;
-    border-color: ${props => props.$hasError ? '#ff4444' : '#00ff00'};
-    box-shadow: 0 0 0 2px ${props => props.$hasError ? 'rgba(255, 68, 68, 0.1)' : 'rgba(0, 255, 0, 0.1)'};
+    border-color: ${props => props.$hasError ? '#ff4444' : '#00ffeaff'};
+    box-shadow: 0 0 0 2px ${props => props.$hasError ? 'rgba(255, 68, 68, 0.1)' : 'rgba(0, 255, 191, 0.1)'};
   }
 
   &::placeholder {
@@ -233,7 +233,7 @@ const ErrorMessage = styled.span`
 
 const Button = styled.button`
   background: linear-gradient(135deg, #1a1a1a 0%, #333333 100%);
-  color: #00ff00;
+  color: #00ffeaff;
   border: 1px solid #404040;
   padding: 1rem;
   border-radius: 8px;
@@ -245,8 +245,8 @@ const Button = styled.button`
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 255, 0, 0.2);
-    border-color: #00ff00;
+    box-shadow: 0 5px 15px rgba(0, 255, 191, 0.2);
+    border-color: #00ffeaff;
   }
 
   &:active {
@@ -260,7 +260,7 @@ const LoginLink = styled.p`
   color: #a8a8a8;
 
   a {
-    color: #00ff00;
+    color: #00ffeaff;
     text-decoration: none;
     font-weight: 600;
 
@@ -284,7 +284,7 @@ const RequirementList = styled.div`
 `;
 
 const Requirement = styled.span`
-  color: ${props => props.$isMet ? '#00ff00' : '#a8a8a8'};
+  color: ${props => props.$isMet ? '#00ffeaff' : '#a8a8a8'};
   transition: color 0.3s ease;
 `;
 
@@ -293,7 +293,7 @@ const MessageBox = styled.div`
   margin-bottom: 1rem;
   border-radius: 8px;
   text-align: center;
-  background-color: ${props => props.$type === 'success' ? '#4CAF50' : '#f44336'};
+  background-color: ${props => props.$type === 'success' ? '#4caf98ff' : '#f44336'};
   color: white;
   font-weight: 500;
 `;
@@ -323,7 +323,7 @@ const TogglePasswordButton = styled.button`
   transition: color 0.3s ease;
 
   &:hover {
-    color: #00ff00;
+    color: #00ffeaff;
   }
 
   svg {

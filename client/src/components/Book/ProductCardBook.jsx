@@ -13,7 +13,7 @@ const ProductCardBook = ({ item, onStatusChange }) => {
   const isOutOfStock = stock === 0;
   const isInactive = active === false;
   const navigate = useNavigate();
-  const { canEditProducts } = useAuth();
+  const { canEditProducts, canAddFavourite } = useAuth();
   const [isToggling, setIsToggling] = useState(false);
 
   // Calcular precio con descuento
@@ -59,7 +59,8 @@ const ProductCardBook = ({ item, onStatusChange }) => {
         {isOutOfStock && <div className="stock-overlay">Sin stock</div>}
         {isInactive && <div className="inactive-overlay">Deshabilitado</div>}
         {hasDiscount && <div className="discount-badge">{discountPercentage}% OFF</div>}
-        <div className="save">
+        {canAddFavourite && canAddFavourite() && (
+          <div className="save">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 683 683" className="svg">
                 <g clipPath="url(#clip0_993_25)">
                   <mask height={683} width={683} y={0} x={0} maskUnits="userSpaceOnUse" style={{maskType: 'luminance'}} id="mask0_993_25">
@@ -75,18 +76,20 @@ const ProductCardBook = ({ item, onStatusChange }) => {
                   </clipPath>
                 </defs>
               </svg>
-        </div>
+          </div>
+        )}
       </div>
       <div className="textBook">
         <h3 className="titulo">{title}</h3>
         <p className="autor">{author}</p>
         <p className="descrProd">{description}</p>
         <div className="priceBuy">
+          
           {hasDiscount ? (
-            <>
+            <div className="priceDiscountBook">
               <span className="original-price">${price.toFixed(2)}</span>
               <span className="final-price">${finalPrice.toFixed(2)}</span>
-            </>
+             </div>
           ) : (
             <span className="price">${price.toFixed(2)}</span>
           )}
