@@ -8,7 +8,7 @@
   color:#fff;
   background-color: rgb(21, 1, 1);
   width: 280px;
-  height:670px;
+  height:600px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
   overflow: hidden;
@@ -286,7 +286,9 @@
     border: 1px solid rgba(0, 255, 208, 0.2);
     cursor: pointer;
     margin-bottom: 0;
+  
   }
+
 
 .buttonCardB:hover {
     background: linear-gradient(135deg, #20B2AA 0%, #7FFFD4 100%);
@@ -317,7 +319,7 @@
 .text {
     padding: 20px 15px;
     display: flex;
-    height:350px;
+    height:280px;
     width: 280px;
     flex-direction: column;
     justify-content:space-between;

@@ -136,7 +136,7 @@ const DetailPage = () => {
     <Container>
       <Card>
         <ImageContainer>
-          <img src={imageUrl} alt={item.title} />
+          <img src={imageUrl} alt={item.title} className={isDisc? 'widthDisc': 'widthBook'}/>
         </ImageContainer>
         <InfoContainer>
           <Title>{item.title}</Title>
@@ -168,17 +168,13 @@ const DetailPage = () => {
               </DetailRow>
             </BookInfo>
           )}
-
-          <Description>{item.description}</Description>
-
           <GenreContainer>
             {genresArray.map((genre, index) => (
               <GenreTag key={index}>{genre}</GenreTag>
             ))}
           </GenreContainer>
-
-          {renderPrice()}
-
+          <PriceStockContainer>
+           
            {item.stock > 0 ? (
             <StockContainer className={isAdminOn? 'stockContDisabled': ''}>
               <StockStatus>✔ ¡En stock!</StockStatus>
@@ -191,13 +187,24 @@ const DetailPage = () => {
                  <AddToCartButton  type='button' onClick={handleAddToCart} className={isAdminOn? 'disabled': ''} >
                    Agregar al carrito
                  </AddToCartButton>
-               </QuantityContainer>
+              </QuantityContainer>
               <StockInfo>Stock disponible: {item.stock}</StockInfo>
             </StockContainer>
           ) : (
             <NoStockMessage>No hay stock disponible</NoStockMessage>
           )}
+            {renderPrice()}
+          </PriceStockContainer>
+          
         </InfoContainer>
+        <FeaturesContainer>
+
+        </FeaturesContainer>
+        <DescriptionContainer>
+          <h3>Sinopsis de <span>{item.title}</span></h3>
+          <Description>{item.description}</Description>
+        </DescriptionContainer>
+
       </Card>
     </Container>
   );
@@ -236,6 +243,7 @@ const Container = styled.div`
 `
 const Card = styled.div`
   display: flex;
+  flex-wrap: wrap;
   background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(25px);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -245,7 +253,7 @@ const Card = styled.div`
     0 0 0 1px rgba(255, 255, 255, 0.03),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
   overflow: hidden;
-  max-width: 1200px;
+ 
   width: 100%;
   position: relative;
   z-index: 1;
@@ -288,13 +296,7 @@ const Card = styled.div`
     100% { background-position: 0% 50%; }
   }
 
-  &:hover {
-    transform: translateY(-5px) scale(1.01);
-    box-shadow: 
-      0 40px 80px rgba(0, 0, 0, 0.7),
-      0 0 0 1px rgba(255, 255, 255, 0.08),
-      inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  }
+  
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -303,8 +305,8 @@ const Card = styled.div`
 `
 
 const ImageContainer = styled.div`
-  flex: 1;
-  padding: 3rem;
+  width:45%;
+  padding: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -325,8 +327,7 @@ const ImageContainer = styled.div`
   }
 
   img {
-    max-width: 100%;
-    max-height: 500px;
+    
     object-fit: contain;
     border-radius: 20px;
     box-shadow: 
@@ -343,20 +344,65 @@ const ImageContainer = styled.div`
         0 0 0 1px rgba(255, 255, 255, 0.15),
         0 0 30px rgba(255, 255, 255, 0.05);
     }
+    
+  }
+  .widthDisc {
+    height: 480px;
+  }
+  .widthBook {
+    height: 600px
   }
 
   @media (max-width: 768px) {
     padding: 2rem;
   }
+
+`
+const FeaturesContainer = styled.div`
+  width:45%;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 80%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.02) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    padding: 2rem;
+  }
+
 `
 
 const InfoContainer = styled.div`
-  flex: 1.2;
+  width:55%;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
   background: rgba(0, 0, 0, 0.2);
+`
+const DescriptionContainer = styled.div`
+  width:55%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  background: rgba(0, 0, 0, 0.2);
+  color: rgba(255, 255, 255, 0.8);
+
 `
 
 const Title = styled.h1`
@@ -413,13 +459,14 @@ const PriceSection = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 1.4rem 1.6rem;
+  padding: 1.4rem;
   background: rgba(255, 255, 255, 0.03);
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(15px);
   position: relative;
   overflow: hidden;
+  width:42%;
 
   &::before {
     content: '';
@@ -597,15 +644,17 @@ const DetailRow = styled.div`
   margin: 0;
   padding: 0.8rem;
   font-size: 0.9rem;
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(10px);
 `
 
 const DetailLabel = styled.span`
   color: rgba(255, 255, 255, 0.6);
   font-weight: 400;
   min-width: 100px;
+  
 `
 
 const DetailValue = styled.span`
@@ -694,16 +743,22 @@ const GenreTag = styled.span`
     }
   }
 `
-
+const PriceStockContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1.3rem;
+  flex-wrap: wrap;
+`
 const StockContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
-  padding: 1rem;
-  background: rgba(0, 255, 208, 0.05);
+  padding: 1.35rem;
+  background: rgba(0, 255, 208, 0.04);
   border-radius: 16px;
-  border: 1px solid rgba(0, 255, 204, 0.2);
+  border: 1px solid rgba(0, 255, 204, 0.11);
   backdrop-filter: blur(10px);
+  width:55%;
 
   &.stockContDisabled {
     filter: grayscale(0.7) brightness(0.7);

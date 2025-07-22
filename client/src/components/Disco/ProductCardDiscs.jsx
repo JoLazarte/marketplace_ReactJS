@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useBuys } from '../../hooks/useBuys';
+import { useDispatch } from 'react-redux';
+import { setBuyId } from '../../store/slices/buySlice';
 import './ProductCardDisc.css';
 import { FaRegEdit, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useAuth } from '../../hooks/useAuth';
+import { useCart } from '../../hooks/useCart';
 import { toggleAlbumStatus } from '../../utils/apiUtils';
 import { toast } from 'react-toastify';
 
@@ -10,16 +14,113 @@ const ProductCardDiscs = ({ item, onStatusChange }) => {
   if (!item) return null;
 
   const { id, title, author, description, urlImage, price, stock = 0, active, discountPercentage = 0, discountActive = false } = item;
-  const navigate = useNavigate();
-  const { canEditProducts, canAddFavourite } = useAuth();
-  const [isToggling, setIsToggling] = useState(false);
-
   const isOutOfStock = stock === 0;
   const isInactive = active === false;
+  const navigate = useNavigate();
+  const { canEditProducts, canAddFavourite, isAdmin, token, isAuthenticated } = useAuth();
+  const [isToggling, setIsToggling] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const isAdminOn = isAdmin()
+  const { addToCart, cartItems } = useCart();
+  const [quantity, setQuantity] = useState(1);
+  const { createBuy, loading: buyLoading, error: buyError } = useBuys();
+  const dispatch = useDispatch();
 
   // Calcular precio con descuento
   const hasDiscount = discountActive && discountPercentage > 0;
   const finalPrice = hasDiscount ? price * (1 - discountPercentage / 100) : price;
+
+  const handleAddToCart = () => {
+    
+    const itemToAdd = {
+        ...item,
+        quantity: quantity,
+        price: item.price,
+        discountPercentage: item.discountPercentage || 0,
+        discountActive: item.discountActive || false
+    };
+      addToCart(itemToAdd);
+    
+  };
+
+  const handleCheckout = async () => {
+        if (!isAuthenticated || !token) {
+          toast.info(
+            <div style={{margin: '1rem'}}>
+              <p style={{fontSize: '1rem'}}>🔐 Necesitas iniciar sesión para continuar</p>
+              <div style={{ marginTop: '2rem', display: 'flex', flexDirection: 'column', gap: '0.8rem', justifyContent: 'center', alignItems: 'center'  }}>
+                <button 
+                  onClick={() => {
+                    toast.dismiss();
+                    navigate('/login');
+                  }}
+                  style={{
+                    background: '#00ffd5ff',
+                    color: '#000',
+                    border: 'none',
+                    padding: '8px 16px',
+                    borderRadius: '8px',
+                    cursor: 'pointer',
+                    fontWeight: 'bold',
+                    fontSize: '1rem',
+                    width: '8rem'
+                  }}
+                >
+                  Iniciar Sesión
+                </button>
+                <button 
+                  onClick={() => {
+                    toast.dismiss();
+                    navigate('/register');
+                  }}
+                  style={{
+                    background: '#ff4000ff',
+                    color: '#fff',
+                    border: 'none',
+                    padding: '8px 16px',
+                    borderRadius: '8px',
+                    cursor: 'pointer',
+                    fontWeight: 'bold',
+                    fontSize: '1rem',
+                    width: '8rem'
+                  }}
+                >
+                  Registrarse
+                </button>
+              </div>
+            </div>,
+            {
+              position: "top-center",
+              autoClose: false,
+              closeOnClick: false,
+              pauseOnHover: true,
+              draggable: true,
+            }
+          );
+          return;
+        }
+    
+        setLoading(true);
+        setError(null);
+    
+        try {
+          handleAddToCart();
+          // Crear la compra directamente
+          const buyData = await createBuy(cartItems, token);
+          console.log('Compra creada:', buyData);
+    
+          // Guardamos el ID de la compra en Redux (persistido)
+          dispatch(setBuyId(buyData.id));
+    
+          navigate('/checkout'); 
+        } catch (err) {
+          setError(err.message || 'Error al procesar el carrito. Por favor, intenta nuevamente.');
+          console.error('Error en checkout:', err);
+        } finally {
+          setLoading(false);
+        }
+  };
 
   const handleToggleStatus = async (e) => {
     e.preventDefault();
@@ -86,7 +187,6 @@ const ProductCardDiscs = ({ item, onStatusChange }) => {
         <h3 className="titulo">{title}</h3>
         <p className="autor">{author}</p>
         <p className="labelYear">{item.recordLabel} {item.year && `- ${item.year}`}</p>
-        <p className="descrProd">{description}</p>
         <div className="priceBuy">
           
             {hasDiscount ? (
@@ -98,7 +198,11 @@ const ProductCardDiscs = ({ item, onStatusChange }) => {
               <span className="price">${price.toFixed(2)}</span>
             )}
     
-          <button className="buttonCardB">Comprar</button>
+            <button type='button' onClick={handleCheckout} className={`buttonCardB${isAdminOn? 'disabled': ''}`}
+              disabled={loading || buyLoading}
+            >
+              {loading || buyLoading ? 'Procesando...' : 'Comprar'}
+            </button>
         </div>
       </div>
     </>

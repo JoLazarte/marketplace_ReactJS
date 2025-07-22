@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Cart from '../Cart/Cart';
@@ -55,6 +55,8 @@ const Header = () => {
     setShowUserMenu(false);
   };
 
+  
+
   return (
     <HeaderContainer>
       <Logo>
@@ -67,7 +69,9 @@ const Header = () => {
       </Logo>
 
       <SearchBarContainer>
-        <SearchBar />
+        <SearchBar
+      
+        />
       </SearchBarContainer>
 
     
@@ -212,7 +216,7 @@ const Nav = styled.nav`
   gap: 2rem;
   align-items: center;
   
-  
+
   @media (max-width: 768px) {
     position: fixed;
     top: 70px;

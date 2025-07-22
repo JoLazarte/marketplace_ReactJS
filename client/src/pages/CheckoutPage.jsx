@@ -3,9 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'; 
 import styled from 'styled-components';
 import { useCart } from '../hooks/useCart';
-
 import { useBuys } from '../hooks/useBuys';
-import { seleccionarMetodoDePago, limpiarMetodoDePago } from '../store/slices/pagoSlice'; // NUEVO
+import { seleccionarMetodoDePago, limpiarMetodoDePago } from '../store/slices/pagoSlice'; 
 import { clearBuyId } from '../store/slices/buySlice';
 import { toast } from 'react-toastify';
 
@@ -399,27 +398,52 @@ const CheckoutPage = () => {
 
 // Styled Components
 const Container = styled.div`
-  padding: 2rem;
-  background-color: #121212;
-  color: white;
   min-height: 100vh;
+  padding: 6rem 1rem 1rem;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #121212 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  position: relative;
+
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 80%, rgba(0, 255, 187, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 68, 68, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
 `;
 
 const CheckoutCard = styled.div`
-  background: #1e1e1e;
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-  border: 1px solid #333;
-  max-width: 800px;
-  margin: 0 auto;
+  padding: 2rem 3rem;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  box-shadow: 
+    0 30px 60px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  width: 60%;
+  
 `;
 
 const Title = styled.h2`
-  margin: 0 0 1rem 0;
-  font-size: 1.8rem;
-  color: #00ff00;
-  text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 1.6rem;
+  color: #00ffc3ff;
+  text-shadow: 0 0 10px rgba(0, 255, 234, 0.3);
 `;
 
 const UserInfo = styled.div`
@@ -430,7 +454,7 @@ const UserInfo = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   
   h3 {
-    color: #00ff00;
+    color: #00ffc8ff;
     margin-bottom: 0.8rem;
   }
   
@@ -444,8 +468,9 @@ const OrderSummary = styled.div`
   margin-bottom: 1.5rem;
   
   h3 {
-    color: #00ff00;
-    margin-bottom: 1rem;
+    color: #00ffccff;
+    margin-bottom: 1.3rem;
+    font-size: 1.5rem;
   }
 `;
 
@@ -460,7 +485,7 @@ const ItemRow = styled.div`
   
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 255, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 255, 195, 0.1);
   }
 `;
 
@@ -512,7 +537,7 @@ const TotalLabel = styled.div`
 
 const TotalAmount = styled.div`
   font-size: 1.6rem;
-  color: #00ff00;
+  color: #00ffccff;
   font-weight: bold;
 `;
 
@@ -520,7 +545,7 @@ const PaymentSection = styled.div`
   margin: 2rem 0;
   
   h3 {
-    color: #00ff00;
+    color: #00ffccff;
     margin-bottom: 1rem;
     font-size: 1.3rem;
   }
@@ -554,9 +579,9 @@ const PaymentMethod = styled.div`
 
   &.seleccionado {
     background: #252525;
-    color: #00ff00;
-    border-color: #00ff00;
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+    color: #00ffccff;
+    border-color: #00ffccff;
+    box-shadow: 0 0 15px rgba(0, 255, 187, 0.3);
   }
 `;
 
@@ -614,8 +639,8 @@ const CardInput = styled.input`
   box-sizing: border-box;
 
   &:focus {
-    border-color: #00ff00;
-    box-shadow: 0 0 0 2px rgba(0, 255, 0, 0.2);
+    border-color: #00ffccff;
+    box-shadow: 0 0 0 2px rgba(0, 255, 187, 0.2);
     outline: none;
   }
 `;
@@ -765,16 +790,16 @@ const SuccessContent = styled.div`
 
 const SuccessIcon = styled.div`
   font-size: 3.5rem;
-  color: #00ff00;
+  color: #00ffccff;
   margin-bottom: 1.5rem;
-  text-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+  text-shadow: 0 0 20px rgba(0, 255, 208, 0.5);
 `;
 
 const SuccessTitle = styled.h3`
   margin: 0 0 1.2rem 0;
-  color: #00ff00;
+  color: #00ffccff;
   font-size: 1.8rem;
-  text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+  text-shadow: 0 0 10px rgba(0, 255, 183, 0.3);
 `;
 
 const SuccessMessage = styled.p`
@@ -786,7 +811,7 @@ const SuccessMessage = styled.p`
 
 const HomeButton = styled.button`
   padding: 1rem 2rem;
-  background: #00ff00;
+  background: #00ffccff;
   border: none;
   border-radius: 8px;
   color: #000000;
@@ -794,12 +819,12 @@ const HomeButton = styled.button`
   font-size: 1.1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 255, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 255, 208, 0.3);
 
   &:hover {
-    background: #00cc00;
+    background: #00cc96ff;
     transform: translateY(-3px);
-    box-shadow: 0 8px 16px rgba(0, 255, 0, 0.4);
+    box-shadow: 0 8px 16px rgba(0, 255, 204, 0.4);
   }
   
   &:active {
@@ -913,12 +938,12 @@ const OriginalPrice = styled.span`
 `;
 
 const FinalPriceText = styled.span`
-  color: #00ff00;
+  color: #00ffccff;
   font-weight: bold;
 `;
 
 const SubtotalText = styled.span`
-  color: ${props => props.hasDiscount ? '#00ff00' : 'inherit'};
+  color: ${props => props.hasDiscount ? '#00ffccff' : 'inherit'};
   font-weight: ${props => props.hasDiscount ? 'bold' : 'normal'};
 `;
 
@@ -953,7 +978,7 @@ const OriginalTotalAmount = styled.span`
 `;
 
 const SavingsAmount = styled.span`
-  color: #00ff00;
+  color: #00ffccff;
   font-weight: bold;
   font-size: 1.1rem;
 `;

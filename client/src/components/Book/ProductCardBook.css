@@ -7,7 +7,7 @@
   color:#fff;
   background-color: rgb(21, 1, 1);
   width: 280px;
-  height:700px;
+  height:660px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
   overflow: hidden;
@@ -232,7 +232,7 @@
 .textBook {
     padding: 20px 15px;
     display: flex;
-    height:320px;
+    height:280px;
     flex-direction: column;
     justify-content:space-between;
     font-family: system-ui;

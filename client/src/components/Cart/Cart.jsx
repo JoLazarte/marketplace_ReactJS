@@ -48,9 +48,9 @@ const Cart = ({ isOpen, onClose }) => {
   const handleCheckout = async () => {
     if (!isAuthenticated || !token) {
       toast.info(
-        <div>
-          <p>🔐 Necesitas iniciar sesión para continuar</p>
-          <div style={{ marginTop: '10px', display: 'flex', gap: '10px', justifyContent: 'center' }}>
+        <div style={{margin: '1rem'}}>
+          <p style={{fontSize: '1rem'}}>🔐 Necesitas iniciar sesión para continuar</p>
+          <div style={{ marginTop: '2rem', display: 'flex', flexDirection: 'column', gap: '0.8rem', justifyContent: 'center', alignItems: 'center'  }}>
             <button 
               onClick={() => {
                 toast.dismiss();
@@ -61,9 +61,11 @@ const Cart = ({ isOpen, onClose }) => {
                 color: '#000',
                 border: 'none',
                 padding: '8px 16px',
-                borderRadius: '4px',
+                borderRadius: '8px',
                 cursor: 'pointer',
-                fontWeight: 'bold'
+                fontWeight: 'bold',
+                fontSize: '1rem',
+                width: '8rem'
               }}
             >
               Iniciar Sesión
@@ -78,9 +80,11 @@ const Cart = ({ isOpen, onClose }) => {
                 color: '#fff',
                 border: 'none',
                 padding: '8px 16px',
-                borderRadius: '4px',
+                borderRadius: '8px',
                 cursor: 'pointer',
-                fontWeight: 'bold'
+                fontWeight: 'bold',
+                fontSize: '1rem',
+                width: '8rem'
               }}
             >
               Registrarse
@@ -93,7 +97,6 @@ const Cart = ({ isOpen, onClose }) => {
           closeOnClick: false,
           pauseOnHover: true,
           draggable: true,
-          theme: "dark",
         }
       );
       return;
